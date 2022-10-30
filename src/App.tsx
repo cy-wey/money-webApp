@@ -1,36 +1,39 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link, Navigate
+  Navigate
 } from 'react-router-dom';
+import {Nav} from './components/Nav';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
+const Main = styled.div`
+  flex-grow: 1;
+  overflow: auto;
+`;
 
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/money">记账</Link>
-            </li>
-            <li>
-              <Link to="/tags">标签</Link>
-            </li>
-            <li>
-              <Link to="/statistics">统计</Link>
-            </li>
-          </ul>
-        </nav>
-        <Routes>
-          <Route path="/money" element={<Money/>}/>
-          <Route path="/tags" element={<Tabs/>}/>
-          <Route path="/statistics" element={<Statistics/>}/>
-          <Route path="/*" element={<NoMatch/>}/>
-          <Route path="/" element={<Navigate to="/money"/>}/>
-        </Routes>
-      </div>
+      <Wrapper>
+        <Main>
+          <Routes>
+            <Route path="/money" element={<Money/>}/>
+            <Route path="/tags" element={<Tabs/>}/>
+            <Route path="/statistics" element={<Statistics/>}/>
+            <Route path="/*" element={<NoMatch/>}/>
+            <Route path="/" element={<Navigate to="/money"/>}/>
+          </Routes>
+        </Main>
+        <Nav/>
+      </Wrapper>
     </Router>
   );
 }
@@ -48,7 +51,7 @@ function Statistics() {
 }
 
 function NoMatch() {
-  return <h1>页面不存在</h1>
+  return <h1>页面不存在</h1>;
 }
 
 export default App;
