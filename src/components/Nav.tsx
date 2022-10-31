@@ -1,9 +1,8 @@
 import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
+import {Icon} from './Icon';
 
-require('../icons/money.svg');
-require('../icons/tag.svg');
-require('../icons/statistics.svg');
+
 const Wrapper = styled.nav`
   width: 100%;
   background: #FCFCFC;
@@ -34,11 +33,8 @@ const Wrapper = styled.nav`
         }
         &.selected {
           color: #303E9F;
-          
           .icon {
-            fill: #fff;
-            background: #303E9F;
-            border-radius: 2px;
+            fill: #303E9F;
           }
         }
       }
@@ -55,9 +51,7 @@ const Nav = () => {
           <NavLink to="/tags" className={({isActive}) =>
             isActive ? activeClassName : undefined
           }>
-            <svg className="icon">
-              <use xlinkHref={'#tag'}/>
-            </svg>
+          <Icon name="tag"/>
             标签
           </NavLink>
         </li>
@@ -65,18 +59,15 @@ const Nav = () => {
           <NavLink to="/money" className={({isActive}) =>
             isActive ? activeClassName : undefined
           }>
-            <svg className="icon">
-              <use xlinkHref={'#money'}/>
-            </svg>
-            记账</NavLink>
+            <Icon name="money"/>
+            记账
+          </NavLink>
         </li>
         <li>
           <NavLink to="/statistics" className={({isActive}) =>
             isActive ? activeClassName : undefined
           }>
-            <svg className="icon">
-              <use xlinkHref={'#statistics'}/>
-            </svg>
+            <Icon name="statistics"/>
             统计
           </NavLink>
         </li>
