@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 ol, li {
@@ -10,4 +11,13 @@ ol, li {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+:focus {
+  outline: none;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
 }
