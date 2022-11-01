@@ -5,7 +5,7 @@ import {
   Route,
   Navigate
 } from 'react-router-dom';
-import {Nav} from './components/Nav';
+
 import styled from 'styled-components';
 import {Money} from './views/Money';
 import {NoMatch} from './views/NoMatch';
