@@ -4,11 +4,13 @@ import {Icon} from '../../components/Icon';
 const Wrapper = styled.div`
   margin-top: 10px;
   flex-grow: 1;
+
   ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-row-gap: 26px;
+
     > li {
       display: flex;
       flex-direction: column;
@@ -33,7 +35,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Tabs = () => {
+const OutputTabs = () => {
   return (
     <Wrapper>
       <ul>
@@ -70,4 +72,4 @@ const Tabs = () => {
   );
 };
 
-export {Tabs};
+export {OutputTabs};

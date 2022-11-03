@@ -1,21 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Layout} from '../components/Layout';
 import {Category} from './Money/Category';
-import {Tabs} from './Money/Tabs';
 import {NumberPad} from './Money/NumberPad';
 import styled from 'styled-components';
+import {InPutTabs} from './Money/InputTabs';
+import {OutputTabs} from './Money/OutputTabs';
 
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `;
 
+type CategoryType = '-' | '+'
+
+const defaultFormData = {
+  category: '-' as CategoryType,
+};
 
 function Money() {
+  const [selected, setSelected] = useState(defaultFormData);
+  const onChange = (obj: Partial<typeof selected>) => {
+    setSelected({
+      ...selected,
+      ...obj
+    });
+  };
   return (
     <MyLayout>
-      <Category/>
-      <Tabs/>
+      <Category value={selected.category}
+                onChange={category => onChange({category})}/>
+      {selected.category === '-' ? <OutputTabs/> : <InPutTabs/>}
+
       <NumberPad/>
     </MyLayout>
   );
