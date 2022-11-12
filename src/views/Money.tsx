@@ -3,7 +3,7 @@ import {Layout} from '../components/Layout';
 import {Category} from './Money/Category';
 import {NumberPad} from './Money/NumberPad';
 import styled from 'styled-components';
-import {InPutTabs} from './Money/InputTabs';
+import {InputTabs} from './Money/InputTabs';
 import {OutputTabs} from './Money/OutputTabs';
 
 const MyLayout = styled(Layout)`
@@ -15,6 +15,7 @@ type CategoryType = '-' | '+'
 
 const defaultFormData = {
   category: '-' as CategoryType,
+  note:'',
 };
 
 function Money() {
@@ -29,9 +30,10 @@ function Money() {
     <MyLayout>
       <Category value={selected.category}
                 onChange={category => onChange({category})}/>
-      {selected.category === '-' ? <OutputTabs/> : <InPutTabs/>}
+      {selected.category === '-' ? <OutputTabs/> : <InputTabs/>}
 
-      <NumberPad/>
+      <NumberPad noteValue={selected.note}
+      noteOnChange={note => onChange({note})}/>
     </MyLayout>
   );
 }
