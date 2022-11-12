@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Icon} from '../../components/Icon';
+import React, {useState} from 'react';
 
 const Wrapper = styled.div`
   margin-top: 10px;
@@ -36,40 +37,30 @@ const Wrapper = styled.div`
 `;
 
 const OutputTabs = () => {
-  return (
-    <Wrapper>
-      <ul>
-        <li className="selected">
-          <Icon className="icon " name="餐饮"/>
-          <span>餐饮</span>
-        </li>
-        <li>
-          <Icon className="icon" name="水果"/>
-          <span>水果</span>
-        </li>
-        <li>
-          <Icon className="icon" name="餐饮"/>
-          <span>餐饮</span>
-        </li>
-        <li>
-          <Icon className="icon" name="餐饮"/>
-          <span>餐饮</span>
-        </li>
-        <li>
-          <Icon className="icon" name="餐饮"/>
-          <span>餐饮</span>
-        </li>
-        <li>
-          <Icon className="icon" name="餐饮"/>
-          <span>餐饮</span>
-        </li>
-        <li>
-          <Icon className="icon" name="餐饮"/>
-          <span>餐饮</span>
-        </li>
-      </ul>
-    </Wrapper>
-  );
+    const [tags, setTags] = useState<string[]>(['餐饮', '房租','水电','交通'])
+    const [selectedTag, setSelectedTag] = useState<string[]>([])
+    const getClass = (tag:string) => selectedTag.indexOf(tag) >= 0 ? 'selected' : ''
+    const onToggleTag = (tag: string) => {
+        const index = selectedTag.indexOf(tag);
+        if (index >= 0) {
+            setSelectedTag(selectedTag.filter(t => t !== tag));
+        } else {
+            setSelectedTag([...selectedTag, tag])
+        }
+    }
+    return (
+        <Wrapper>
+            <ul>
+                {tags.map(tag =>
+                    <li onClick={() => onToggleTag(tag)} className={getClass(tag)}>
+                        <Icon className="icon " name={tag}/>
+                        <span>{tag}</span>
+                    </li>
+                )}
+
+            </ul>
+        </Wrapper>
+    );
 };
 
 export {OutputTabs};
