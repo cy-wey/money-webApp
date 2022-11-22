@@ -45,14 +45,14 @@ const InputTabs = () => {
         if (index >= 0) {
             setSelectedTag(selectedTag.filter(t => t !== tag));
         } else {
-            setSelectedTag([...selectedTag, tag])
+            setSelectedTag([tag])
         }
     }
     return (
         <Wrapper>
             <ul>
                 {tags.map(tag =>
-                    <li onClick={() => onToggleTag(tag)} className={getClass(tag)}>
+                    <li key={tag} onClick={() => onToggleTag(tag)} className={getClass(tag)}>
                         <Icon className="icon " name={tag}/>
                         <span>{tag}</span>
                     </li>
