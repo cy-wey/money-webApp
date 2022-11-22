@@ -36,16 +36,21 @@ const Wrapper = styled.div`
   }
 `;
 
-const OutputTabs = () => {
+type Props = {
+    selected: string[];
+    onChange: (selected: string[]) => void;
+}
+
+const OutputTabs: React.FC<Props> = (props) => {
     const [tags, setTags] = useState<string[]>(['餐饮', '房租','水电','交通'])
-    const [selectedTag, setSelectedTag] = useState<string[]>([])
-    const getClass = (tag:string) => selectedTag.indexOf(tag) >= 0 ? 'selected' : ''
-    const onToggleTag = (tag: string) => {
-        const index = selectedTag.indexOf(tag);
+    const getClass = (tag:string) => selectedTags.indexOf(tag) >= 0 ? 'selected' : ''
+    const selectedTags = props.selected;
+    const onToggleTag = (tags: string) => {
+        const index = selectedTags.indexOf(tags);
         if (index >= 0) {
-            setSelectedTag(selectedTag.filter(t => t !== tag));
+            props.onChange(selectedTags.filter(t => t !== tags));
         } else {
-            setSelectedTag([tag])
+            props.onChange([tags])
         }
     }
     return (
