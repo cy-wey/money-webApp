@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {ChangeEventHandler} from "react";
+import React, {ChangeEventHandler, useState} from "react";
 
 const Wrapper = styled.div`
   .title {
@@ -67,13 +67,70 @@ const NumberPad: React.FC<Props> = (props) => {
     const noteOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         props.noteOnChange(e.target.value)
     }
+
+    const [output, _setOutput] = useState('0');
+    const setOutput = (output: string) => {
+        if (output.length > 16) {
+            output = output.slice(0, 16)
+        } else if (output.length === 0) {
+            output = '0';
+        }
+        _setOutput(output)
+    }
+    const onClickButtonWrapper = (e: React.MouseEvent) => {
+        const text = (e.target as HTMLButtonElement).textContent;
+        if (text === null) {
+            return
+        }
+        ;
+        switch (text) {
+            case '0':
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                if (output === '0') {
+                    setOutput(text);
+                } else {
+                    setOutput(output + text)
+                }
+                break;
+            case '.':
+                if (output.indexOf('.') >= 0) {
+                    return;
+                }
+                setOutput(output + '.')
+                break;
+            case '清空':
+                setOutput('');
+                break;
+            case '删除':
+                if (output.length === 1) {
+                    setOutput('');
+                } else {
+                    setOutput(output.slice(0, -1))
+                }
+                break;
+            case '完成':
+                console.log('确认')
+                break;
+
+
+        }
+    }
     return (
         <Wrapper>
             <div className="title">
                 <input type="text" placeholder="输入备注..." value={note} onChange={noteOnChange}></input>
-                <span>0</span>
+                <span>{output}</span>
             </div>
-            <div className="buttonList clearfix">
+            <div className="buttonList clearfix" onClick={onClickButtonWrapper}>
                 <button>7</button>
                 <button>8</button>
                 <button>9</button>
