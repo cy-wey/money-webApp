@@ -6,8 +6,8 @@ import {Icon} from "../components/Icon";
 import styled from "styled-components";
 import {Center} from "../components/Center";
 import {Input} from "../components/Input";
-import {TagsSection} from "./Money/TagsSection";
 import {TagsWrapper} from "./Money/TagsSection/TagsWrapper";
+import {useIcons} from "../hooks/useIcons";
 
 type Params = {
   id: string
@@ -62,28 +62,30 @@ const SelectIcon = styled.div`
     padding: 8px 18px;
     color: #444444;
   }
-  
+
   ul {
     grid-row-gap: 10px;
   }
 `
 const Tag: React.FC = (props) => {
-  const {findTag} = useTags()
   const navigate = useNavigate();
   const onClickBack = () => {
     navigate(-1)
   }
   let {id} = useParams<Params>();
+  const {tags, findTag, updateTag} = useTags()
+  const {icons,setIcons, findIcon} = useIcons();
   const tag = findTag(parseInt(id as string))
-  const {tags} = useTags()
   const [selectedTagIds, setSelectedTags] = useState<number[]>([]);
-  const getClass = (tagId:number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
+  const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
     if (index >= 0) {
       setSelectedTags(selectedTagIds.filter(t => t !== tagId));
     } else {
       setSelectedTags([tagId])
+      const icon = findIcon(tagId)
+      updateTag(tag.id, {name: tag.name, icon: icon.name})
     }
   }
   return (
@@ -95,9 +97,13 @@ const Tag: React.FC = (props) => {
       </TopBar>
       <Content>
         <Center>
-          <Icon name={tag.icon}/>
-          <Input label="" type="text" placeholder="标签名" value={tag.name}
+          <Icon name={tag.icon}  onChange={() => {
+            updateTag(tag.id, {name: tag.icon, icon: tag.icon})
+          }}/>
+          <Input label="" type="text" placeholder="标签名"
+                 value={tag.name}
                  onChange={(e) => {
+                   updateTag(tag.id, {name: e.target.value, icon: tag.icon})
                  }}
           />
         </Center>
@@ -106,9 +112,9 @@ const Tag: React.FC = (props) => {
         <div className="selectIcon">选择图标</div>
         <TagsWrapper>
           <ul>
-            {tags.map(icon =>
-              <li key={icon.id}onClick={() => onToggleTag(icon.id)} className={getClass(icon.id)}>
-                <Icon name={icon.icon}></Icon>
+            {icons.map(icon =>
+              <li key={icon.id} onClick={() => onToggleTag(icon.id)} className={getClass(icon.id)}>
+                <Icon name={icon.name}></Icon>
               </li>)}
 
           </ul>
