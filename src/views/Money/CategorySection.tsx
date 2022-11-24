@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import {useState} from 'react';
-import {OutputTabs} from "./OutputTabs";
 
 const Wrapper = styled.div`
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-
   > ul {
     display: flex;
     justify-content: center;
@@ -37,7 +35,7 @@ type Props = {
   onChange: (value: '-' | '+') => void
 }
 
-const Category: React.FC<Props> = (props) => {
+const CategorySection: React.FC<Props> = (props) => {
   const categoryMap = {'-': '支出', '+': '收入'};
   type Keys = keyof typeof categoryMap
   const [categorylist] = useState<Keys[]>(['-', '+']);
@@ -54,4 +52,4 @@ const Category: React.FC<Props> = (props) => {
   );
 };
 
-export {Category};
+export {CategorySection};

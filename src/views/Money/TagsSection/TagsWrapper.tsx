@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TabsWrapper = styled.div`
+const TagsWrapper = styled.div`
   margin-top: 10px;
   flex-grow: 1;
 
@@ -34,4 +34,4 @@ const TabsWrapper = styled.div`
   }
 `
 
-export {TabsWrapper};
+export {TagsWrapper};

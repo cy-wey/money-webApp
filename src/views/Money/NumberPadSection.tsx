@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, {ChangeEventHandler, useState} from "react";
-import {generateOutput} from "./NumberPad/generateOutput";
+import {generateOutput} from "./NumberPadSection/generateOutput";
 
 const Wrapper = styled.div`
   .title {
@@ -65,7 +65,7 @@ type Props = {
 }
 
 
-const NumberPad: React.FC<Props> = (props) => {
+const NumberPadSection: React.FC<Props> = (props) => {
 
   const note = props.noteValue;
   const noteOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -124,4 +124,4 @@ const NumberPad: React.FC<Props> = (props) => {
     </Wrapper>
   )
 }
-export {NumberPad}
+export {NumberPadSection};

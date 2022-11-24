@@ -4,7 +4,7 @@ import {useTags} from "../hooks/useTags";
 import {Icon} from "../components/Icon";
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {Category} from "./Money/Category";
+import {CategorySection} from "./Money/CategorySection";
 import {Center} from "../components/Center";
 import {Space} from "../components/Space";
 import {Button} from "../components/Button";
@@ -48,16 +48,17 @@ const TabList = styled.ul`
 function Tags() {
   const {tags, setTags} = useTags()
   const [category, setCategory] = useState<'-' | '+'>('-');
+  const SelectedTags = tags.filter(r => r.category === category)
   return (
     <Layout>
-      <Category value={category}
-                onChange={value => setCategory(value)}/>
+      <CategorySection value={category}
+                       onChange={value => setCategory(value)}/>
       <TabList>
-        {tags.map(tag =>
+        {SelectedTags.map(tag =>
           <li key={tag.id}>
             <Link to={'/tags/' + tag.id}>
               <div>
-                <Icon className="icon " name={tag.name}/>
+                <Icon className="icon " name={tag.icon}/>
                 <span>{tag.name}</span>
               </div>
               <Icon className="icon right-arrow" name="right"/>

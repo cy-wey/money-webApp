@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import {Layout} from '../components/Layout';
-import {Category} from './Money/Category';
-import {NumberPad} from './Money/NumberPad';
+import {CategorySection} from './Money/CategorySection';
+import {NumberPadSection} from './Money/NumberPadSection';
 import styled from 'styled-components';
-import {InputTabs} from './Money/InputTabs';
-import {OutputTabs} from './Money/OutputTabs';
+import {TagsSection} from "./Money/TagsSection";
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -30,21 +29,19 @@ function Money() {
   };
   return (
     <MyLayout>
-      {selected.tagIds}  {selected.category} {selected.amount} {selected.note}
-      <Category value={selected.category}
-                onChange={category => onChange({category})}/>
-      {selected.category === '-' ?
-        <OutputTabs selected={selected.tagIds}
-                    onChange={tagIds => onChange({tagIds})}
-                    /> :
-        <InputTabs selected={selected.tagIds}
-                   onChange={tagIds => onChange({tagIds})}/>}
+      {selected.tagIds} {selected.category} {selected.amount} {selected.note}
+      <CategorySection value={selected.category}
+                       onChange={category => onChange({category})}/>
+      <TagsSection selected={selected.tagIds}
+                   category={selected.category}
+                   onChange={tagIds => onChange({tagIds})}
+      />
 
-      <NumberPad noteValue={selected.note}
-                 noteOnChange={note => onChange({note})
-                 }
-                 amountValue={selected.amount}
-                 amountOnChange={amount => onChange({amount})}
+      <NumberPadSection noteValue={selected.note}
+                        noteOnChange={note => onChange({note})
+                        }
+                        amountValue={selected.amount}
+                        amountOnChange={amount => onChange({amount})}
       />
     </MyLayout>
   );
