@@ -12,7 +12,7 @@ const Label = styled.label`
   > input {
     display: flex;
     width: 100%;
-    height: 44px;
+    height: 24px;
     background: none;
     border: none;
     font-size: 16px;

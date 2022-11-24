@@ -40,16 +40,19 @@ const Content = styled.div`
   margin-top: 20px;
 
   .icon {
-    height: 52px;
-    width: 52px;
+    height: 50px;
+    width: 50px;
     fill: #999;
   }
 
   input {
-    margin-top: 16px;
+    margin-top: 20px;
     text-align: center;
     border-bottom: 2px solid #747474;
     width: 100px;
+  }
+  input:focus{
+    border-bottom: 2px solid #313d9f;
   }
 `
 

@@ -8,6 +8,7 @@ const defaultIcons = [
   {id: createId(), name: '交通'},
   {id: createId(), name: '工资'},
   {id: createId(), name: '理财'},
+  {id: createId(), name: '红包'},
 ]
 
 const useIcons = () => {

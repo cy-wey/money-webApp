@@ -16,6 +16,14 @@ const TabList = styled.ul`
   
   > li {
     border-bottom: 1px solid #e4e4e4;
+    display: flex;
+    align-items: center;
+    .delectIcon {
+      height: 36px;
+      width: 36px;
+      fill: #dc0000;
+      margin: 0px 10px;
+    }
     > a {
       display: flex;
       align-items: center;
@@ -23,14 +31,14 @@ const TabList = styled.ul`
       > div {
         display: flex;
         align-items: center;
+        min-width: 260px;
       }
-      .icon {
+      .tagIcon {
         height: 50px;
         width: 50px;
         fill: #999;
-        margin: 6px 20px;
-      }
-      
+        margin: 6px 20px 6px 0;
+      } 
       .right-arrow {
         height: 20px;
         width: 20px;
@@ -38,15 +46,16 @@ const TabList = styled.ul`
 
       span {
         font-size: 16px;
-        margin-left: -6px;
+        margin-left: -8px;
         color: #444;
       }
     }
   }
 `
 
+
 function Tags() {
-  const {tags, setTags} = useTags()
+  const {tags, setTags, delectTag} = useTags()
   const [category, setCategory] = useState<'-' | '+'>('-');
   const SelectedTags = tags.filter(r => r.category === category)
   return (
@@ -56,9 +65,10 @@ function Tags() {
       <TabList>
         {SelectedTags.map(tag =>
           <li key={tag.id}>
+            <Icon className="delectIcon" name="删除" onClick={()=> delectTag(tag.id)}/>
             <Link to={'/tags/' + tag.id}>
               <div>
-                <Icon className="icon " name={tag.icon}/>
+                <Icon className="icon tagIcon" name={tag.icon}/>
                 <span>{tag.name}</span>
               </div>
               <Icon className="icon right-arrow" name="right"/>
