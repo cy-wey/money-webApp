@@ -5,6 +5,9 @@ import {Icon} from "../components/Icon";
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {Category} from "./Money/Category";
+import {Center} from "../components/Center";
+import {Space} from "../components/Space";
+import {Button} from "../components/Button";
 
 const TabList = styled.ul`
   font-size: 16px;
@@ -64,6 +67,11 @@ function Tab() {
           </li>
         )}
       </TabList>
+      <Center>
+        <Space/>
+        <Space/>
+        <Button>新增类别</Button>
+      </Center>
     </Layout>
   );
 }
