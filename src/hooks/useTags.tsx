@@ -13,11 +13,10 @@ const defaultTags = [
   {id:createId(), name: '红包', icon: '红包', category: '+' as CategoryType},
 ]
 
-
-
 const useTags = () => {
   const [tags, setTags] = useState<{id: number, name: string, icon: string, category: CategoryType}[]>(defaultTags)
-  return {tags,setTags}
+  const findTag = (id: number) => tags.filter(tag => tag.id === id)[0]
+  return {tags,setTags, findTag}
 }
 
 export {useTags}

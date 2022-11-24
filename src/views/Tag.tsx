@@ -1,6 +1,17 @@
-const Tag = () => {
+import React from "react";
+import {useTags} from "../hooks/useTags";
+import {useParams} from "react-router-dom";
+
+type Params = {
+    id :string
+}
+
+const Tag: React.FC = (props) => {
+    const {findTag} = useTags()
+    let {id} = useParams<Params>();
+    const tag = findTag(parseInt(id as string))
     return (
-      <h2>Tag页面</h2>
+      <div>{tag.name}</div>
     )
 }
 
