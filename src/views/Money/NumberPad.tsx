@@ -56,97 +56,108 @@ const Wrapper = styled.div`
 
 `
 type Props = {
-    noteValue: string;
-    noteOnChange: (value: string) => void;
+  noteValue: string;
+  noteOnChange: (value: string) => void;
+  amountValue: number;
+  amountOnChange: (value: number) => void;
+  onOK?: () => void;
 }
 
 
 const NumberPad: React.FC<Props> = (props) => {
 
-    const note = props.noteValue;
-    const noteOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        props.noteOnChange(e.target.value)
-    }
+  const note = props.noteValue;
+  const noteOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    props.noteOnChange(e.target.value)
+  }
 
-    const [output, _setOutput] = useState('0');
-    const setOutput = (output: string) => {
-        if (output.length > 16) {
-            output = output.slice(0, 16)
-        } else if (output.length === 0) {
-            output = '0';
-        }
-        _setOutput(output)
+  const [output, _setOutput] = useState(props.amountValue.toString());
+  const setOutput = (output: string) => {
+    let newOutput: string
+    if (output.length > 16) {
+      newOutput = output.slice(0, 16)
+    } else if (output.length === 0) {
+      newOutput = '0';
+    } else {
+      newOutput = output;
     }
-    const onClickButtonWrapper = (e: React.MouseEvent) => {
-        const text = (e.target as HTMLButtonElement).textContent;
-        if (text === null) {
-            return
+    _setOutput(newOutput)
+    props.amountOnChange(parseFloat(newOutput))
+  }
+  const onClickButtonWrapper = (e: React.MouseEvent) => {
+    const text = (e.target as HTMLButtonElement).textContent;
+    if (text === null) {
+      return;
+    }
+    if (text === '完成') {
+      if (props.onOK) {
+        props.onOK();
+      }
+    }
+    switch (text) {
+      case '0':
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+        if (output === '0') {
+          setOutput(text);
+        } else {
+          setOutput(output + text)
         }
-        ;
-        switch (text) {
-            case '0':
-            case '0':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
-                if (output === '0') {
-                    setOutput(text);
-                } else {
-                    setOutput(output + text)
-                }
-                break;
-            case '.':
-                if (output.indexOf('.') >= 0) {
-                    return;
-                }
-                setOutput(output + '.')
-                break;
-            case '清空':
-                setOutput('');
-                break;
-            case '删除':
-                if (output.length === 1) {
-                    setOutput('');
-                } else {
-                    setOutput(output.slice(0, -1))
-                }
-                break;
-            case '完成':
-                console.log('确认')
-                break;
+        break;
+      case '.':
+        if (output.indexOf('.') >= 0) {
+          return;
+        }
+        setOutput(output + '.')
+        break;
+      case '清空':
+        setOutput('');
+        break;
+      case '删除':
+        if (output.length === 1) {
+          setOutput('');
+        } else {
+          setOutput(output.slice(0, -1))
+        }
+        break;
+      case '完成':
+        console.log('确认')
+        break;
 
 
-        }
     }
-    return (
-        <Wrapper>
-            <div className="title">
-                <input type="text" placeholder="输入备注..." value={note} onChange={noteOnChange}></input>
-                <span>{output}</span>
-            </div>
-            <div className="buttonList clearfix" onClick={onClickButtonWrapper}>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>删除</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>清空</button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button className="OK">完成</button>
-                <button className="zero">0</button>
-                <button>.</button>
-            </div>
-        </Wrapper>
-    )
+  }
+  return (
+    <Wrapper>
+      <div className="title">
+        <input type="text" placeholder="输入备注..." value={note} onChange={noteOnChange}></input>
+        <span>{output}</span>
+      </div>
+      <div className="buttonList clearfix" onClick={onClickButtonWrapper}>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>删除</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>清空</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button className="OK">完成</button>
+        <button className="zero">0</button>
+        <button>.</button>
+      </div>
+    </Wrapper>
+  )
 }
 export {NumberPad}
