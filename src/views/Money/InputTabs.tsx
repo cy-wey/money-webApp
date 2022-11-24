@@ -1,19 +1,21 @@
 import {Icon} from '../../components/Icon';
 import React, {useState} from 'react';
 import {TabsWrapper} from "./Tags/TabsWrapper";
+import {createId} from "../../lib/createId";
 
 type Props = {
     selected: number[];
     onChange: (selected: number[]) => void;
 }
 
+const defaulltTags = [
+  {id:createId(), name: '工资'},
+  {id:createId(), name: '理财'},
+  {id:createId(), name: '红包'}
+]
+
 const InputTabs: React.FC<Props> = (props) => {
-    const [tags, setTags] = useState<{id: number, name: string}[]>(
-      [
-          {id:1, name: '工资'},
-          {id:2, name: '理财'},
-          {id:3, name: '红包'}
-      ])
+    const [tags, setTags] = useState<{id: number, name: string}[]>(defaulltTags)
     const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
     const selectedTagIds = props.selected;
     const onToggleTag = (tagId: number) => {

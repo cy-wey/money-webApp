@@ -26,7 +26,7 @@ function App() {
           <Routes>
             <Route path="/money" element={<Money/>}/>
             <Route path="/tags" element={<Tags/>}/>
-            <Route path="/tags/:tag" element={<Tag/>}/>
+            <Route path="/tags/:id" element={<Tag/>}/>
             <Route path="/statistics" element={<Statistics/>}/>
             <Route path="/*" element={<NoMatch/>}/>
             <Route path="/" element={<Navigate to="/money"/>}/>

@@ -43,8 +43,6 @@ const TabList = styled.ul`
       }
     }
   }
-
-  
 `
 
 function Tags() {
@@ -57,7 +55,7 @@ function Tags() {
       <TabList>
         {tags.map(tag =>
           <li key={tag.id}>
-            <Link to={'/tags/' + tag}>
+            <Link to={'/tags/' + tag.id}>
               <div>
                 <Icon className="icon " name={tag.name}/>
                 <span>{tag.name}</span>
