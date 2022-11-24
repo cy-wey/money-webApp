@@ -20,6 +20,8 @@ const defaultFormData = {
   tags: [] as string[],
 };
 
+
+
 function Money() {
   const [selected, setSelected] = useState(defaultFormData);
   const onChange = (obj: Partial<typeof selected>) => {
@@ -34,8 +36,11 @@ function Money() {
       <Category value={selected.category}
                 onChange={category => onChange({category})}/>
       {selected.category === '-' ?
-        <OutputTabs selected={selected.tags} onChange={tags => onChange({tags})}/> :
-        <InputTabs/>}
+        <OutputTabs selected={selected.tags}
+                    onChange={tags => onChange({tags})}
+                    /> :
+        <InputTabs selected={selected.tags}
+                   onChange={tags => onChange({tags})}/>}
 
       <NumberPad noteValue={selected.note}
                  noteOnChange={note => onChange({note})
