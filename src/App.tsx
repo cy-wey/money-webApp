@@ -9,7 +9,8 @@ import {
 import styled from 'styled-components';
 import {Money} from './views/Money';
 import {NoMatch} from './views/NoMatch';
-import {Tab} from './views/Tag';
+import {Tags} from './views/Tags';
+import {Tag} from './views/Tag';
 import {Statistics} from './views/Statistiics';
 
 const Wrapper = styled.div`
@@ -24,7 +25,8 @@ function App() {
       <Wrapper>
           <Routes>
             <Route path="/money" element={<Money/>}/>
-            <Route path="/tags" element={<Tab/>}/>
+            <Route path="/tags" element={<Tags/>}/>
+            <Route path="/tags/:tag" element={<Tag/>}/>
             <Route path="/statistics" element={<Statistics/>}/>
             <Route path="/*" element={<NoMatch/>}/>
             <Route path="/" element={<Navigate to="/money"/>}/>
