@@ -23,24 +23,29 @@ const useTags = () => {
         }
       }
       return result;
-    }
+    };
     const updateTag = (id: number, obj: { name: string, icon: string }) => {
-      const index = findTagIndex(id);
-      // 深拷贝 tags 得到 tagsClone
-      const tagsClone = JSON.parse(JSON.stringify(tags));
-      // 把 tagsClone 的第index 删除，换成 {id: id ,name: obj.name, icon: obj.icon}
-      tagsClone.splice(index, 1, {id: id, name: obj.name, icon: obj.icon});
-      setTags(tagsClone);
+      // const index = findTagIndex(id);
+      // // 深拷贝 tags 得到 tagsClone
+      // const tagsClone = JSON.parse(JSON.stringify(tags));
+      // // 把 tagsClone 的第index 删除，换成 {id: id ,name: obj.name, icon: obj.icon}
+      // tagsClone.splice(index, 1, {id: id, name: obj.name, icon: obj.icon});
+      // setTags(tagsClone);
+
+      // @ts-ignore
+      setTags(tags.map(tag => tag.id === id ? {id, name: obj.name, icon: obj.icon} : tag));
     };
 
-    const delectTag = (id: number) => {
-      const index = findTagIndex(id);
-      const tagsClone = JSON.parse(JSON.stringify(tags));
-      tagsClone.splice(index, 1);
-      setTags(tagsClone);
+    const deleteTag = (id: number) => {
+      // const index = findTagIndex(id);
+      // const tagsClone = JSON.parse(JSON.stringify(tags));
+      // tagsClone.splice(index, 1);
+      // setTags(tagsClone);
+
+      setTags(tags.filter(tag => tag.id !== id))
     }
 
-    return {tags, setTags, findTag, updateTag, delectTag}
+    return {tags, setTags, findTag, updateTag, deleteTag}
   }
 
   export {useTags}

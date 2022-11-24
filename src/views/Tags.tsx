@@ -18,7 +18,7 @@ const TabList = styled.ul`
     border-bottom: 1px solid #e4e4e4;
     display: flex;
     align-items: center;
-    .delectIcon {
+    .deleteIcon {
       height: 36px;
       width: 36px;
       fill: #dc0000;
@@ -55,7 +55,7 @@ const TabList = styled.ul`
 
 
 function Tags() {
-  const {tags, setTags, delectTag} = useTags()
+  const {tags, setTags, deleteTag} = useTags()
   const [category, setCategory] = useState<'-' | '+'>('-');
   const SelectedTags = tags.filter(r => r.category === category)
   return (
@@ -65,7 +65,7 @@ function Tags() {
       <TabList>
         {SelectedTags.map(tag =>
           <li key={tag.id}>
-            <Icon className="delectIcon" name="删除" onClick={()=> delectTag(tag.id)}/>
+            <Icon className="deleteIcon" name="删除" onClick={()=> deleteTag(tag.id)}/>
             <Link to={'/tags/' + tag.id}>
               <div>
                 <Icon className="icon tagIcon" name={tag.icon}/>
