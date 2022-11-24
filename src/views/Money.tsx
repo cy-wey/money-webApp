@@ -17,10 +17,8 @@ const defaultFormData = {
   category: '-' as CategoryType,
   note: '',
   amount: 0,
-  tags: [] as string[],
+  tagIds: [] as number[],
 };
-
-
 
 function Money() {
   const [selected, setSelected] = useState(defaultFormData);
@@ -32,15 +30,15 @@ function Money() {
   };
   return (
     <MyLayout>
-      {selected.tags}  {selected.category} {selected.amount} {selected.note}
+      {selected.tagIds}  {selected.category} {selected.amount} {selected.note}
       <Category value={selected.category}
                 onChange={category => onChange({category})}/>
       {selected.category === '-' ?
-        <OutputTabs selected={selected.tags}
-                    onChange={tags => onChange({tags})}
+        <OutputTabs selected={selected.tagIds}
+                    onChange={tagIds => onChange({tagIds})}
                     /> :
-        <InputTabs selected={selected.tags}
-                   onChange={tags => onChange({tags})}/>}
+        <InputTabs selected={selected.tagIds}
+                   onChange={tagIds => onChange({tagIds})}/>}
 
       <NumberPad noteValue={selected.note}
                  noteOnChange={note => onChange({note})

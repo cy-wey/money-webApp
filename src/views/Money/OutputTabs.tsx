@@ -5,29 +5,29 @@ import {TabsWrapper} from "./Tags/TabsWrapper";
 import {useTags} from "../../hooks/useTags";
 
 type Props = {
-  selected: string[];
-  onChange: (selected: string[]) => void;
+  selected: number[];
+  onChange: (selected: number[]) => void;
 }
 
 const OutputTabs: React.FC<Props> = (props) => {
   const {tags, setTags} = useTags()
-  const getClass = (tag: string) => selectedTags.indexOf(tag) >= 0 ? 'selected' : ''
-  const selectedTags = props.selected;
-  const onToggleTag = (tags: string) => {
-    const index = selectedTags.indexOf(tags);
+  const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
+  const selectedTagIds = props.selected;
+  const onToggleTag = (tagId: number) => {
+    const index = selectedTagIds.indexOf(tagId);
     if (index >= 0) {
-      props.onChange(selectedTags.filter(t => t !== tags));
+      props.onChange(selectedTagIds.filter(t => t !== tagId));
     } else {
-      props.onChange([tags])
+      props.onChange([tagId])
     }
   }
   return (
     <TabsWrapper>
       <ul>
         {tags.map(tag =>
-          <li key={tag} onClick={() => onToggleTag(tag)} className={getClass(tag)}>
-            <Icon className="icon " name={tag}/>
-            <span>{tag}</span>
+          <li key={tag.id} onClick={() => onToggleTag(tag.id)} className={getClass(tag.id)}>
+            <Icon className="icon " name={tag.name}/>
+            <span>{tag.name}</span>
           </li>
         )}
       </ul>

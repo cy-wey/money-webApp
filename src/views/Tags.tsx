@@ -56,11 +56,11 @@ function Tags() {
                 onChange={value => setCategory(value)}/>
       <TabList>
         {tags.map(tag =>
-          <li key={tag}>
+          <li key={tag.id}>
             <Link to={'/tags/' + tag}>
               <div>
-                <Icon className="icon " name={tag}/>
-                <span>{tag}</span>
+                <Icon className="icon " name={tag.name}/>
+                <span>{tag.name}</span>
               </div>
               <Icon className="icon right-arrow" name="right"/>
             </Link>
