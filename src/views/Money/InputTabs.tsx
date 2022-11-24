@@ -1,66 +1,35 @@
-import styled from 'styled-components';
 import {Icon} from '../../components/Icon';
 import React, {useState} from 'react';
+import {TabsWrapper} from "./Tags/TabsWrapper";
 
-const Wrapper = styled.div`
-  margin-top: 10px;
-  flex-grow: 1;
+type Props = {
+    selected: string[];
+    onChange: (selected: string[]) => void;
+}
 
-  ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-row-gap: 26px;
-
-    > li {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #444;
-
-      > .icon {
-        height: 50px;
-        width: 50px;
-        fill: #ddd;
-        margin-bottom: 12px;
-      }
-
-      &.selected {
-        color: #303E9F;
-
-        > .icon {
-          fill: #303E9F;
-        }
-      }
-    }
-  }
-`;
-
-const InputTabs = () => {
+const InputTabs: React.FC<Props> = (props) => {
     const [tags, setTags] = useState<string[]>(['工资', '理财','红包'])
-    const [selectedTag, setSelectedTag] = useState<string[]>([])
-    const getClass = (tag:string) => selectedTag.indexOf(tag) >= 0 ? 'selected' : ''
-    const onToggleTag = (tag: string) => {
-        const index = selectedTag.indexOf(tag);
+    const getClass = (tag: string) => selectedTags.indexOf(tag) >= 0 ? 'selected' : ''
+    const selectedTags = props.selected;
+    const onToggleTag = (tags: string) => {
+        const index = selectedTags.indexOf(tags);
         if (index >= 0) {
-            setSelectedTag(selectedTag.filter(t => t !== tag));
+            props.onChange(selectedTags.filter(t => t !== tags));
         } else {
-            setSelectedTag([tag])
+            props.onChange([tags])
         }
     }
     return (
-        <Wrapper>
-            <ul>
-                {tags.map(tag =>
-                    <li key={tag} onClick={() => onToggleTag(tag)} className={getClass(tag)}>
-                        <Icon className="icon " name={tag}/>
-                        <span>{tag}</span>
-                    </li>
-                )}
-
-            </ul>
-        </Wrapper>
+      <TabsWrapper>
+          <ul>
+              {tags.map(tag =>
+                <li key={tag} onClick={() => onToggleTag(tag)} className={getClass(tag)}>
+                    <Icon className="icon " name={tag}/>
+                    <span>{tag}</span>
+                </li>
+              )}
+          </ul>
+      </TabsWrapper>
     );
 };
-
 export {InputTabs};

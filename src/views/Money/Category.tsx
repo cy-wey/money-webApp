@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {useState} from 'react';
+import {OutputTabs} from "./OutputTabs";
 
 const Wrapper = styled.div`
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
@@ -11,6 +12,7 @@ const Wrapper = styled.div`
     > li {
       width: 74px;
       text-align: center;
+      font-size: 16px;
       padding: 16px 0;
       position: relative;
       &.selected {

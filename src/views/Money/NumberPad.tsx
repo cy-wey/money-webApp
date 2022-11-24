@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React, {ChangeEventHandler, useState} from "react";
+import {generateOutput} from "./NumberPad/generateOutput";
 
 const Wrapper = styled.div`
   .title {
@@ -94,45 +95,8 @@ const NumberPad: React.FC<Props> = (props) => {
         props.onOK();
       }
     }
-    switch (text) {
-      case '0':
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-        if (output === '0') {
-          setOutput(text);
-        } else {
-          setOutput(output + text)
-        }
-        break;
-      case '.':
-        if (output.indexOf('.') >= 0) {
-          return;
-        }
-        setOutput(output + '.')
-        break;
-      case '清空':
-        setOutput('');
-        break;
-      case '删除':
-        if (output.length === 1) {
-          setOutput('');
-        } else {
-          setOutput(output.slice(0, -1))
-        }
-        break;
-      case '完成':
-        console.log('确认')
-        break;
-
-
+    if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text) >= 0) {
+      setOutput(generateOutput(text, output));
     }
   }
   return (
