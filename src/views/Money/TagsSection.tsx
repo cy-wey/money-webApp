@@ -12,8 +12,8 @@ type Props = {
 const TagsSection: React.FC<Props> = (props) => {
   const {tags, setTags} = useTags()
   const SelectedTags = tags.filter(r => r.category === props.category)
-  const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
   const selectedTagIds = props.selected;
+  const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
     if (index >= 0) {

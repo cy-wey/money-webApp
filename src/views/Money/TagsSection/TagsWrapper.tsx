@@ -19,7 +19,7 @@ const TagsWrapper = styled.div`
       > .icon {
         height: 50px;
         width: 50px;
-        fill: #ddd;
+        fill: #999;
         margin-bottom: 12px;
       }
 

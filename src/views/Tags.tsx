@@ -27,7 +27,7 @@ const TabList = styled.ul`
       .icon {
         height: 50px;
         width: 50px;
-        fill: #ddd;
+        fill: #999;
         margin: 6px 20px;
       }
       
