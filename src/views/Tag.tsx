@@ -8,7 +8,6 @@ import {Center} from "../components/Center";
 import {Input} from "../components/Input";
 import {TagsWrapper} from "./Money/TagsSection/TagsWrapper";
 import {useIcons} from "../hooks/useIcons";
-import {createId} from "../lib/createId";
 
 type Params = {
   id: string
@@ -79,10 +78,10 @@ const Tag: React.FC = (props) => {
   const onClickBack = () => {
     navigate(-1)
   }
-  let {id} = useParams<Params>();
+  let {id: idString} = useParams<Params>();
   const {tags, findTag, updateTag, addTag} = useTags()
-  const {icons, setIcons, findIcon} = useIcons();
-  const tag = findTag(parseInt(id as string))
+  const {icons, findIcon} = useIcons();
+  const tag = findTag(parseInt(idString as string))
   const [selectedTagIds, setSelectedTags] = useState<number[]>([]);
   const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
 
@@ -102,8 +101,8 @@ const Tag: React.FC = (props) => {
     updateTag(tag.id, {name: e.target.value, icon: tag.icon, category: tag.category})
     tagName = e.target.value;
   }
-  console.log(tags)
   const save = () => {
+    // 新增类别
     if(tag.id <= 0 ) {
       console.log('saved');
       console.log(tagName);
