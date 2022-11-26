@@ -3,7 +3,7 @@ import {Layout} from '../components/Layout';
 import {useTags} from "../hooks/useTags";
 import {Icon} from "../components/Icon";
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import {CategorySection} from "./Money/CategorySection";
 import {Center} from "../components/Center";
 import {Space} from "../components/Space";
@@ -57,7 +57,16 @@ const TabList = styled.ul`
 function Tags() {
   const {tags, setTags, deleteTag} = useTags()
   const [category, setCategory] = useState<'-' | '+'>('-');
-  const SelectedTags = tags.filter(r => r.category === category)
+  const SelectedTags = tags.filter(r => r.category === category && r.id > 0)
+  const navigate = useNavigate();
+  const addTag = () => {
+    if (category === '+') {
+      navigate('/tags/0');
+    } else {
+      navigate('/tags/-1')
+    }
+
+  }
   return (
     <Layout>
       <CategorySection value={category}
@@ -79,7 +88,7 @@ function Tags() {
       <Center>
         <Space/>
         <Space/>
-        <Button>新增类别</Button>
+        <Button onClick={addTag}>新增类别</Button>
       </Center>
     </Layout>
   );

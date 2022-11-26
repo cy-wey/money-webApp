@@ -8,6 +8,7 @@ import {Center} from "../components/Center";
 import {Input} from "../components/Input";
 import {TagsWrapper} from "./Money/TagsSection/TagsWrapper";
 import {useIcons} from "../hooks/useIcons";
+import {createId} from "../lib/createId";
 
 type Params = {
   id: string
@@ -51,7 +52,8 @@ const Content = styled.div`
     border-bottom: 2px solid #747474;
     width: 100px;
   }
-  input:focus{
+
+  input:focus {
     border-bottom: 2px solid #313d9f;
   }
 `
@@ -70,17 +72,20 @@ const SelectIcon = styled.div`
     grid-row-gap: 10px;
   }
 `
+let tagName = '';
+let iconName = ''
 const Tag: React.FC = (props) => {
   const navigate = useNavigate();
   const onClickBack = () => {
     navigate(-1)
   }
   let {id} = useParams<Params>();
-  const {tags, findTag, updateTag} = useTags()
-  const {icons,setIcons, findIcon} = useIcons();
+  const {tags, findTag, updateTag, addTag} = useTags()
+  const {icons, setIcons, findIcon} = useIcons();
   const tag = findTag(parseInt(id as string))
   const [selectedTagIds, setSelectedTags] = useState<number[]>([]);
   const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
+
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
     if (index >= 0) {
@@ -88,25 +93,46 @@ const Tag: React.FC = (props) => {
     } else {
       setSelectedTags([tagId])
       const icon = findIcon(tagId)
-      updateTag(tag.id, {name: tag.name, icon: icon.name})
+      iconName = icon.name;
+      console.log(iconName)
+      updateTag(tag.id, {name: tag.name, icon: icon.name, category: tag.category})
     }
   }
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateTag(tag.id, {name: e.target.value, icon: tag.icon, category: tag.category})
+    tagName = e.target.value;
+  }
+  console.log(tags)
+  const save = () => {
+    if(tag.id <= 0 ) {
+      console.log('saved');
+      console.log(tagName);
+      console.log(iconName);
+      addTag({name: tagName, icon: iconName, category: tag.category})
+      //navigate(-1)
+    }
+  }
+
   return (
     <Layout>
       <TopBar>
         <Icon name="arrow-left" onClick={onClickBack}/>
-        <span className='title'>编辑{tag.category === '-' ? '支出' : '收入'}类别</span>
-        <span>保存</span>
+        {
+          tag.id <= 0 ?
+            <span className='title'>新增{tag.category === '-' ? '支出' : '收入'}类别</span> :
+            <span className='title'>编辑{tag.category === '-' ? '支出' : '收入'}类别</span>
+        }
+        <span onClick={save}>保存</span>
       </TopBar>
       <Content>
         <Center>
-          <Icon name={tag.icon}  onChange={() => {
-            updateTag(tag.id, {name: tag.icon, icon: tag.icon})
+          <Icon name={tag.icon} onChange={() => {
+            updateTag(tag.id, {name: tag.icon, icon: tag.icon, category: tag.category})
           }}/>
-          <Input label="" type="text" placeholder="标签名"
+          <Input label="" type="text" placeholder="输入类别名称"
                  value={tag.name}
                  onChange={(e) => {
-                   updateTag(tag.id, {name: e.target.value, icon: tag.icon})
+                   onChange(e)
                  }}
           />
         </Center>
