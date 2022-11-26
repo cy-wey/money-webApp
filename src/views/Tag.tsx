@@ -8,7 +8,6 @@ import {Center} from "../components/Center";
 import {Input} from "../components/Input";
 import {TagsWrapper} from "./Money/TagsSection/TagsWrapper";
 import {useIcons} from "../hooks/useIcons";
-import {createId} from "../lib/createId";
 
 type Params = {
   id: string
@@ -79,10 +78,10 @@ const Tag: React.FC = (props) => {
   const onClickBack = () => {
     navigate(-1)
   }
-  let {id} = useParams<Params>();
+  let {id: idString} = useParams<Params>();
   const {tags, findTag, updateTag, addTag} = useTags()
-  const {icons, setIcons, findIcon} = useIcons();
-  const tag = findTag(parseInt(id as string))
+  const {icons, findIcon} = useIcons();
+  const tag = findTag(parseInt(idString as string))
   const [selectedTagIds, setSelectedTags] = useState<number[]>([]);
   const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
 
@@ -102,19 +101,19 @@ const Tag: React.FC = (props) => {
     updateTag(tag.id, {name: e.target.value, icon: tag.icon, category: tag.category})
     tagName = e.target.value;
   }
-  console.log(tags)
   const save = () => {
+    // 新增类别
     if(tag.id <= 0 ) {
       console.log('saved');
       console.log(tagName);
       console.log(iconName);
       addTag({name: tagName, icon: iconName, category: tag.category})
-      //navigate(-1)
     }
+    navigate(-1)
   }
-
-  return (
-    <Layout>
+  type CategoryType = '-' | '+'
+  const tagContent = (tag: { id: number, name: string, icon: string, category: CategoryType }) => (
+    <div>
       <TopBar>
         <Icon name="arrow-left" onClick={onClickBack}/>
         {
@@ -137,6 +136,12 @@ const Tag: React.FC = (props) => {
           />
         </Center>
       </Content>
+    </div>
+  )
+
+  return (
+    <Layout>
+      {tag ? tagContent(tag) : <Center>tag 不存在</Center>}
       <SelectIcon>
         <div className="selectIcon">选择图标</div>
         <TagsWrapper>
