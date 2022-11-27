@@ -10,7 +10,7 @@ type Props = {
 }
 
 const TagsSection: React.FC<Props> = (props) => {
-  const {tags, setTags} = useTags()
+  const {tags, setTags,findTag} = useTags()
   const SelectedTags = tags.filter(r => r.category === props.category && r.id > 0)
   const selectedTagIds = props.selected;
   const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : ''
