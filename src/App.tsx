@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: calc(100vh - var(--vh-offset, 0px));
 `;
 
 function App() {

@@ -54,7 +54,7 @@ const Item = styled.div`
   }
 `
 
-const Header = styled.div`
+const Title = styled.div`
   font-size: 14px;
   background: #eeeeee;
   padding: 8px 6px;
@@ -71,6 +71,72 @@ const Header = styled.div`
   .output {
     margin-right: 10px;
   }
+`
+
+const Header = styled.div`
+  background: #303e9f;
+  color: #ffffe6;
+  display: flex;
+  flex-direction: column;
+  padding-top: 18px;
+  padding-left: 18px;
+  font-weight: 400;
+  
+  .bill {
+    display: flex;
+    .icon {
+      fill: #ffffe6;
+      height: 24px;
+      width: 24px;
+      margin-right: 32px;
+    }
+    .allBill {
+      font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+  }
+  
+  .output{
+    margin-bottom: 20px;
+    > div {
+      display: flex;
+    }
+    .text {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .symbol {
+      font-size: 16px;
+      margin-right: 10px;
+      margin-top: 14px;
+    }
+    .amount {
+      font-size: 30px;
+      font-weight: 700;
+    }
+    
+  }
+  
+  .input {
+    display: flex;
+    margin-bottom: 14px;
+    > div {
+      display: flex;
+      margin-right: 52px;
+    }
+    .totalInput {
+      font-size: 22px;
+      margin-left: 10px;
+      font-weight: 600;
+    }
+    .text {
+      margin-top: 6px;
+      font-size: 14px;
+    }
+  }
+  
 `
 
 function Statistics() {
@@ -95,7 +161,7 @@ function Statistics() {
   })
 
 
-  const dailyCount = (records: RecordItem[], category: '+' | '-') => {
+  const calculateAmount = (records: RecordItem[], category: '+' | '-') => {
     let amountList = [] as number[]
     records.filter(f => f.category === category).map(r => {
       amountList.push(r.amount)
@@ -108,18 +174,44 @@ function Statistics() {
     }
     return sum
   }
+  let totalInput = calculateAmount(records, '+') as number || 0
+  let totalOutput = calculateAmount(records, '-') as number || 0
 
   return (
     <Layout>
-      <div></div>
+      <Header>
+        <div className='bill'>
+          <Icon name='账单'></Icon>
+          <div className='allBill'>全部账单</div>
+        </div>
+
+        <div className='output'>
+          <div className='text'>总计支出</div>
+          <div>
+            <div className='symbol'>￥</div>
+            <div className='amount'>{totalOutput}</div>
+          </div>
+
+        </div>
+        <div className='input'>
+          <div>
+            <div className='text'>总计收入</div>
+            <div className='totalInput'>{totalInput}</div>
+          </div>
+          <div>
+            <div className='text'>总计结余</div>
+            <div className='totalInput'>{totalInput - totalOutput}</div>
+          </div>
+        </div>
+      </Header>
       <hr/>
       {array.map(([date, records]) =>
         <div key={date}>
-          <Header>
+          <Title>
             <div>{date}</div>
-            {dailyCount(records, '+') ? <div className='input'>收入: {dailyCount(records, '+')}</div> : ''}
-            {dailyCount(records, '-') ? <div className='output'>支出: {dailyCount(records, '-')}</div> : ''}
-          </Header>
+            {calculateAmount(records, '+') ? <div className='input'>收入: {calculateAmount(records, '+')}</div> : ''}
+            {calculateAmount(records, '-') ? <div className='output'>支出: {calculateAmount(records, '-')}</div> : ''}
+          </Title>
           <div>
             {records.map(r => {
               return <Item key={r.createdAt}>
