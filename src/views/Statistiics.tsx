@@ -43,47 +43,83 @@ const Item = styled.div`
   .inputAmount {
     color: #cc0001;
   }
+
   .outputAmount {
     color: #2e822c;
   }
+
   .amount {
     margin-right: 10px;
     font-weight: 600;
   }
 `
 
-const Header = styled.h4`
+const Header = styled.div`
   font-size: 14px;
   background: #eeeeee;
   padding: 8px 6px;
   color: #646464;
+  display: flex;
+  font-weight: 600;
+  justify-content: space-between;
+
+  .input {
+    margin-right: 10px;
+    margin-left: auto;
+  }
+
+  .output {
+    margin-right: 10px;
+  }
 `
+
 function Statistics() {
   const {getName, getIcon} = useTags();
   const [category, setCategory] = useState<'-' | '+'>('-');
   const {records} = useRecords()
-  const hash: {[K: string] : RecordItem[]} = {}
+  const hash: { [K: string]: RecordItem[] } = {}
 
-  records.forEach(r=> {
+  records.forEach(r => {
     const key = day(r.createdAt).format('YYYY/MM/DD')
-    if(!(key in hash)) {
+    if (!(key in hash)) {
       hash[key] = []
     }
-      hash[key].push(r)
+    hash[key].push(r)
   })
 
-  const array = Object.entries(hash).sort((a,b)=> {
-    if(a[0] === b[0]) return 0;
-    if(a[0] > b[0]) return -1;
-    if(a[0] < b[0]) return 1;
+  const array = Object.entries(hash).sort((a, b) => {
+    if (a[0] === b[0]) return 0;
+    if (a[0] > b[0]) return -1;
+    if (a[0] < b[0]) return 1;
     return 0;
   })
 
+
+  const dailyCount = (records: RecordItem[], category: '+' | '-') => {
+    let amountList = [] as number[]
+    records.filter(f => f.category === category).map(r => {
+      amountList.push(r.amount)
+    })
+    let sum = amountList.reduce((pre, cur) => {
+      return pre + cur;
+    }, 0)
+    if (sum === 0) {
+      return false
+    }
+    return sum
+  }
+
   return (
     <Layout>
-      {array.map(([date,records])=>
+      <div></div>
+      <hr/>
+      {array.map(([date, records]) =>
         <div key={date}>
-          <Header>{date}</Header>
+          <Header>
+            <div>{date}</div>
+            {dailyCount(records, '+') ? <div className='input'>收入: {dailyCount(records, '+')}</div> : ''}
+            {dailyCount(records, '-') ? <div className='output'>支出: {dailyCount(records, '-')}</div> : ''}
+          </Header>
           <div>
             {records.map(r => {
               return <Item key={r.createdAt}>
@@ -95,10 +131,10 @@ function Statistics() {
                 })}
                 <div className='note'>{r.note}</div>
                 <div className='amount'>
-                {
-                  r.category === '-' ? <div className='outputAmount'>{'-' + r.amount}</div> :
-                    <div className='inputAmount'>{'+' + r.amount}</div>
-                }
+                  {
+                    r.category === '-' ? <div className='outputAmount'>{'-' + r.amount}</div> :
+                      <div className='inputAmount'>{'+' + r.amount}</div>
+                  }
                 </div>
               </Item>
             })}
