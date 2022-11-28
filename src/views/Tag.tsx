@@ -57,9 +57,12 @@ const Content = styled.div`
   }
 `
 
+const Gap = styled.div`
+  height: 172px;
+`
+
 const SelectIcon = styled.div`
   margin-top: 12px;
-
   > .selectIcon {
     font-size: 16px;
     background: #eeeeee;
@@ -141,7 +144,7 @@ const Tag: React.FC = (props) => {
 
   return (
     <Layout>
-      {tag ? tagContent(tag) : <Center>tag 不存在</Center>}
+      {tag ? tagContent(tag) : <Gap/>}
       <SelectIcon>
         <div className="selectIcon">选择图标</div>
         <TagsWrapper>
