@@ -18,20 +18,25 @@ const TabList = styled.ul`
     border-bottom: 1px solid #e4e4e4;
     display: flex;
     align-items: center;
+    
     .deleteIcon {
       height: 36px;
-      width: 36px;
+      width: 36px; 
       fill: #dc0000;
       margin: 0px 10px;
+      
     }
     > a {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-right: 10px;
+      margin-left: auto;
+      width: 100%;
       > div {
         display: flex;
         align-items: center;
-        min-width: 260px;
+       
       }
       .tagIcon {
         height: 50px;
@@ -52,7 +57,6 @@ const TabList = styled.ul`
     }
   }
 `
-
 
 function Tags() {
   const {tags, setTags, deleteTag} = useTags()
@@ -88,7 +92,7 @@ function Tags() {
       <Center>
         <Space/>
         <Space/>
-        <Button onClick={addTag}>新增类别</Button>
+          <Button onClick={addTag}>新增类别</Button>
       </Center>
     </Layout>
   );

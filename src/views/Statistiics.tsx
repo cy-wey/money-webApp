@@ -13,7 +13,6 @@ const Item = styled.div`
   line-height: 20px;
   padding: 8px 0;
   border-bottom: 1px solid #e7e7e7;
-
   > div {
     display: flex;
     align-items: center;
@@ -81,7 +80,8 @@ const Header = styled.div`
   padding-top: 18px;
   padding-left: 18px;
   font-weight: 400;
-  
+  position: fixed;
+  width: 100%;
   .bill {
     display: flex;
     .icon {
@@ -137,6 +137,10 @@ const Header = styled.div`
     }
   }
   
+`
+
+const Gap = styled.div`
+  height: 202px;
 `
 
 function Statistics() {
@@ -204,7 +208,7 @@ function Statistics() {
           </div>
         </div>
       </Header>
-      <hr/>
+      <Gap/>
       {array.map(([date, records]) =>
         <div key={date}>
           <Title>

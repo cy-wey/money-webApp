@@ -33,7 +33,7 @@ function Money() {
     if(addRecord(selected)) {
       addRecord(selected);
       alert('保存成功');
-      setSelected(defaultFormData);
+      setSelected(defaultFormData)
     }
   }
   return (
