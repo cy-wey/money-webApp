@@ -140,7 +140,7 @@ const Header = styled.div`
 `
 
 const Gap = styled.div`
-  height: 202px;
+  height: 190px;
 `
 
 function Statistics() {

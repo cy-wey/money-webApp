@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, {ChangeEventHandler, useState} from "react";
 import {generateOutput} from "./NumberPadSection/generateOutput";
+import {useRecords} from "../../hooks/useRecords";
 
 const Wrapper = styled.div`
   .title {
@@ -66,17 +67,19 @@ type Props = {
 
 
 const NumberPadSection: React.FC<Props> = (props) => {
-
   const note = props.noteValue;
+  console.log('note:' + note);
   const noteOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     props.noteOnChange(e.target.value)
   }
-
-  const [output, _setOutput] = useState(props.amountValue.toString());
+  const amount = props.amountValue.toString()
+  console.log('amount:' + amount);
+  const [output, _setOutput] = useState(amount);
   const setOutput = (output: string) => {
+    console.log('111');
     let newOutput: string
-    if (output.length > 16) {
-      newOutput = output.slice(0, 16)
+    if (output.length > 15) {
+      newOutput = output.slice(0, 15)
     } else if (output.length === 0) {
       newOutput = '0';
     } else {
@@ -93,6 +96,8 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === '完成') {
       if (props.onOK) {
         props.onOK();
+        console.log('完成按钮点击了');
+        _setOutput('')
       }
       return;
     }
@@ -104,7 +109,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     <Wrapper>
       <div className="title">
         <input type="text" placeholder="输入备注..." value={note} onChange={noteOnChange}></input>
-        <span>{output}</span>
+        <span>{amount}</span>
       </div>
       <div className="buttonList clearfix" onClick={onClickButtonWrapper}>
         <button>7</button>
