@@ -57,9 +57,12 @@ const Content = styled.div`
   }
 `
 
+const Gap = styled.div`
+  height: 172px;
+`
+
 const SelectIcon = styled.div`
   margin-top: 12px;
-
   > .selectIcon {
     font-size: 16px;
     background: #eeeeee;
@@ -76,7 +79,7 @@ let iconName = ''
 const Tag: React.FC = (props) => {
   const navigate = useNavigate();
   const onClickBack = () => {
-    navigate(-1)
+    navigate(-1);
   }
   let {id: idString} = useParams<Params>();
   const {tags, findTag, updateTag, addTag} = useTags()
@@ -104,12 +107,9 @@ const Tag: React.FC = (props) => {
   const save = () => {
     // 新增类别
     if(tag.id <= 0 ) {
-      console.log('saved');
-      console.log(tagName);
-      console.log(iconName);
       addTag({name: tagName, icon: iconName, category: tag.category})
     }
-    navigate(-1)
+     navigate(-1);
   }
   type CategoryType = '-' | '+'
   const tagContent = (tag: { id: number, name: string, icon: string, category: CategoryType }) => (
@@ -141,7 +141,7 @@ const Tag: React.FC = (props) => {
 
   return (
     <Layout>
-      {tag ? tagContent(tag) : <Center>tag 不存在</Center>}
+      {tag ? tagContent(tag) : <Gap/>}
       <SelectIcon>
         <div className="selectIcon">选择图标</div>
         <TagsWrapper>

@@ -8,6 +8,7 @@ import {CategorySection} from "./Money/CategorySection";
 import {Center} from "../components/Center";
 import {Space} from "../components/Space";
 import {Button} from "../components/Button";
+import 'animation.scss';
 
 const TabList = styled.ul`
   font-size: 16px;
@@ -58,6 +59,7 @@ const TabList = styled.ul`
   }
 `
 
+
 function Tags() {
   const {tags, setTags, deleteTag} = useTags()
   const [category, setCategory] = useState<'-' | '+'>('-');
@@ -69,7 +71,6 @@ function Tags() {
     } else {
       navigate('/tags/-1')
     }
-
   }
   return (
     <Layout>
@@ -92,7 +93,7 @@ function Tags() {
       <Center>
         <Space/>
         <Space/>
-          <Button onClick={addTag}>新增类别</Button>
+          <Button className='addButton' onClick={addTag}>新增类别</Button>
       </Center>
     </Layout>
   );
