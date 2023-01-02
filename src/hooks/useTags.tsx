@@ -12,11 +12,27 @@ const useTags = () => {
       localTags = [
         {id: -1, name: '', icon: 'empty', category: '-' as CategoryType},
         {id: 0, name: '', icon: 'empty', category: '+' as CategoryType},
-        {id: createId(), name: '餐饮', icon: '餐饮', category: '-' as CategoryType},
-        {id: createId(), name: '房租', icon: '房租', category: '-' as CategoryType},
-        {id: createId(), name: '水电', icon: '水电', category: '-' as CategoryType},
-        {id: createId(), name: '工资', icon: '工资', category: '+' as CategoryType},
-        {id: createId(), name: '理财', icon: '理财', category: '+' as CategoryType},
+        {id: createId(), name: '餐饮',icon: '餐饮', category: '-' as CategoryType},
+        {id: createId(), name: '饮品',icon: '饮品', category: '-' as CategoryType},
+        {id: createId(), name: '零食',icon: '零食', category: '-' as CategoryType},
+        {id: createId(), name: '买菜',icon: '买菜', category: '-' as CategoryType},
+        {id: createId(), name: '交通',icon: '交通', category: '-' as CategoryType},
+        {id: createId(), name: '化妆品',icon: '化妆品', category: '-' as CategoryType},
+        {id: createId(), name: '家具',icon: '家具', category: '-' as CategoryType},
+        {id: createId(), name: '家电',icon: '家电', category: '-' as CategoryType},
+        {id: createId(), name: '房租',icon: '房租', category: '-' as CategoryType},
+        {id: createId(), name: '日用品',icon: '日用品', category: '-' as CategoryType},
+        {id: createId(), name: '水果',icon: '水果', category: '-' as CategoryType},
+        {id: createId(), name: '淘宝',icon: '淘宝', category: '-' as CategoryType},
+        {id: createId(), name: '红包',icon: '红包', category: '-' as CategoryType},
+        {id: createId(), name: '药品',icon: '药品', category: '-' as CategoryType},
+        {id: createId(), name: '衣物',icon: '衣物', category: '-' as CategoryType},
+
+        {id: createId(), name: '工资',icon: '工资', category: '+' as CategoryType},
+        {id: createId(), name: '报销',icon: '报销', category: '+' as CategoryType},
+        {id: createId(), name: '理财',icon: '理财', category: '+' as CategoryType},
+        {id: createId(), name: '红包',icon: '红包', category: '+' as CategoryType},
+        {id: createId(), name: '贷款',icon: '贷款', category: '+' as CategoryType},
       ]
     }
     setTags(localTags)

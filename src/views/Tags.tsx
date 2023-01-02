@@ -11,9 +11,9 @@ import {Button} from "../components/Button";
 import 'animation.scss';
 
 const TabList = styled.ul`
+  margin-top: 62px;
   font-size: 16px;
   background: #fcfcfc;
-  margin-top: 2px;
   
   > li {
     border-bottom: 1px solid #e4e4e4;

@@ -6,7 +6,6 @@ import {Icon} from "../components/Icon";
 import styled from "styled-components";
 import {Center} from "../components/Center";
 import {Input} from "../components/Input";
-import {TagsWrapper} from "./Money/TagsSection/TagsWrapper";
 import {useIcons} from "../hooks/useIcons";
 
 type Params = {
@@ -72,6 +71,44 @@ const SelectIcon = styled.div`
 
   ul {
     grid-row-gap: 10px;
+  }
+`
+
+const TagsWrapper = styled.div`
+  margin-top: 10px;
+  flex-grow: 1;
+
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 12px;
+
+    > li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #444;
+
+      > .icon {
+        height: 50px;
+        width: 50px;
+        fill: #999;
+        margin-bottom: 12px;
+      }
+
+      > .edit-icon {
+        fill: #303E9F;
+      }
+
+      &.selected {
+        color: #303E9F;
+
+        > .icon {
+          fill: #303E9F;
+        }
+      }
+    }
   }
 `
 let tagName = '';

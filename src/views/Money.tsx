@@ -22,20 +22,21 @@ const defaultFormData = {
 
 function Money() {
   const [selected, setSelected] = useState(defaultFormData);
-  const {records,addRecord} = useRecords()
+  const {records, addRecord} = useRecords()
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({
       ...selected,
       ...obj
     });
   };
-  const submit = ()=> {
-    if(addRecord(selected)) {
+  const submit = () => {
+    if (addRecord(selected)) {
       addRecord(selected);
       alert('保存成功')
       setSelected({
         ...selected,
-        amount:0
+        amount: 0,
+        tagIds: [] as number[],
       })
     }
   }
@@ -47,13 +48,13 @@ function Money() {
                    category={selected.category}
                    onChange={tagIds => onChange({tagIds})}
       />
-      {selected.tagIds.length === 0 ? "" :  <NumberPadSection noteValue={selected.note}
-                                                        noteOnChange={note => onChange({note})
-                                                        }
-                                                        amountValue={selected.amount}
-                                                        amountOnChange={amount => onChange({amount})}
-                                                        onOK = {submit}
-      />}
+      <NumberPadSection noteValue={selected.note}
+                        noteOnChange={note => onChange({note})
+                        }
+                        amountValue={selected.amount}
+                        amountOnChange={amount => onChange({amount})}
+                        onOK={submit}
+      />
 
     </MyLayout>
   );

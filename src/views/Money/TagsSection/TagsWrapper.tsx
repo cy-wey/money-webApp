@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const TagsWrapper = styled.div`
-  margin-top: 10px;
+  margin-top: 60px;
+  margin-bottom: 260px;
   flex-grow: 1;
 
   ul {
@@ -21,6 +22,10 @@ const TagsWrapper = styled.div`
         width: 50px;
         fill: #999;
         margin-bottom: 12px;
+      }
+
+      > .edit-icon {
+        fill: #303E9F;
       }
 
       &.selected {
