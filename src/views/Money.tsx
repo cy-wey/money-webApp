@@ -33,7 +33,10 @@ function Money() {
     if(addRecord(selected)) {
       addRecord(selected);
       alert('保存成功');
-      setSelected(defaultFormData)
+      setSelected({
+        ...selected,
+        amount:0
+      })
     }
   }
   return (
@@ -44,14 +47,14 @@ function Money() {
                    category={selected.category}
                    onChange={tagIds => onChange({tagIds})}
       />
+      {selected.tagIds.length === 0 ? "" :  <NumberPadSection noteValue={selected.note}
+                                                        noteOnChange={note => onChange({note})
+                                                        }
+                                                        amountValue={selected.amount}
+                                                        amountOnChange={amount => onChange({amount})}
+                                                        onOK = {submit}
+      />}
 
-      <NumberPadSection noteValue={selected.note}
-                        noteOnChange={note => onChange({note})
-                        }
-                        amountValue={selected.amount}
-                        amountOnChange={amount => onChange({amount})}
-                        onOK = {submit}
-      />
     </MyLayout>
   );
 }
