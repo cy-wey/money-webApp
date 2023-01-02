@@ -32,7 +32,7 @@ function Money() {
   const submit = ()=> {
     if(addRecord(selected)) {
       addRecord(selected);
-      alert('保存成功');
+      alert('保存成功')
       setSelected({
         ...selected,
         amount:0

@@ -68,15 +68,12 @@ type Props = {
 
 const NumberPadSection: React.FC<Props> = (props) => {
   const note = props.noteValue;
-  console.log('note:' + note);
   const noteOnChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     props.noteOnChange(e.target.value)
   }
   const amount = props.amountValue.toString()
-  console.log('amount:' + amount);
   const [output, _setOutput] = useState(amount);
   const setOutput = (output: string) => {
-    console.log('111');
     let newOutput: string
     if (output.length > 15) {
       newOutput = output.slice(0, 15)
@@ -96,7 +93,6 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === '完成') {
       if (props.onOK) {
         props.onOK();
-        console.log('完成按钮点击了');
         _setOutput('')
       }
       return;
