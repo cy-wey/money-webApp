@@ -1,6 +1,7 @@
 {
   "name": "money",
   "version": "0.1.0",
+  "homepage": "https://cy-wey.github.io/money-website/",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
