@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   position: fixed;
   width: 100%;
-  bottom: 62px;
+  bottom: 60px;
   background: white;
   .title {
     display: flex;

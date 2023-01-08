@@ -6,10 +6,9 @@ import {Icon} from './Icon';
 const Wrapper = styled.nav`
   width: 100%;
   background: #FCFCFC;
-  border-top: 1px solid #ccc;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   line-height: 12px;
-
+  z-index: 100;
   > ul {
     display: flex;
 
