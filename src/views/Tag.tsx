@@ -13,6 +13,8 @@ type Params = {
 }
 
 const TopBar = styled.div`
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,9 +36,11 @@ const TopBar = styled.div`
 `
 
 const Content = styled.div`
+  position: fixed;
+  width: 100%;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
 
   .icon {
     height: 50px;
@@ -61,8 +65,10 @@ const Gap = styled.div`
 `
 
 const SelectIcon = styled.div`
-  margin-top: 12px;
+  margin-top: 190px;
   > .selectIcon {
+    position: fixed;
+    width: 100%;
     font-size: 16px;
     background: #eeeeee;
     padding: 8px 18px;
@@ -75,10 +81,10 @@ const SelectIcon = styled.div`
 `
 
 const TagsWrapper = styled.div`
-  margin-top: 10px;
   flex-grow: 1;
-
+  
   ul {
+    padding-top: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;

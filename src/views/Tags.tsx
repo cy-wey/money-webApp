@@ -3,7 +3,7 @@ import {Layout} from '../components/Layout';
 import {useTags} from "../hooks/useTags";
 import {Icon} from "../components/Icon";
 import styled from 'styled-components';
-import {Link,useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {CategorySection} from "./Money/CategorySection";
 import {Center} from "../components/Center";
 import {Space} from "../components/Space";
@@ -14,19 +14,20 @@ const TabList = styled.ul`
   margin-top: 62px;
   font-size: 16px;
   background: #fcfcfc;
-  
+
   > li {
     border-bottom: 1px solid #e4e4e4;
     display: flex;
     align-items: center;
-    
+
     .deleteIcon {
       height: 36px;
-      width: 36px; 
+      width: 36px;
       fill: #dc0000;
       margin: 0px 10px;
-      
+
     }
+
     > a {
       display: flex;
       align-items: center;
@@ -34,17 +35,20 @@ const TabList = styled.ul`
       margin-right: 10px;
       margin-left: auto;
       width: 100%;
+
       > div {
         display: flex;
         align-items: center;
-       
+
       }
+
       .tagIcon {
         height: 50px;
         width: 50px;
         fill: #999;
         margin: 6px 20px 6px 0;
-      } 
+      }
+
       .right-arrow {
         height: 20px;
         width: 20px;
@@ -79,7 +83,7 @@ function Tags() {
       <TabList>
         {SelectedTags.map(tag =>
           <li key={tag.id}>
-            <Icon className="deleteIcon" name="删除" onClick={()=> deleteTag(tag.id)}/>
+            <Icon className="deleteIcon" name="删除" onClick={() => deleteTag(tag.id)}/>
             <Link to={'/tags/' + tag.id}>
               <div>
                 <Icon className="icon tagIcon" name={tag.icon}/>
@@ -92,8 +96,8 @@ function Tags() {
       </TabList>
       <Center>
         <Space/>
+        <Button className='addButton' onClick={addTag}>新增类别</Button>
         <Space/>
-          <Button className='addButton' onClick={addTag}>新增类别</Button>
       </Center>
     </Layout>
   );
