@@ -13,6 +13,7 @@ type Params = {
 }
 
 const TopBar = styled.div`
+  z-index: 5;
   position: fixed;
   width: 100%;
   display: flex;
@@ -23,6 +24,7 @@ const TopBar = styled.div`
   color: #313d9f;
   font-weight: 600;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  background: white;
 
   > .title {
     margin-left: -140px;
@@ -36,12 +38,13 @@ const TopBar = styled.div`
 `
 
 const Content = styled.div`
+  background: white;
   position: fixed;
   width: 100%;
-  margin-top: 80px;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
-
+  padding-bottom: 16px;
   .icon {
     height: 50px;
     width: 50px;
@@ -66,6 +69,7 @@ const Gap = styled.div`
 
 const SelectIcon = styled.div`
   margin-top: 190px;
+
   > .selectIcon {
     position: fixed;
     width: 100%;
@@ -82,7 +86,7 @@ const SelectIcon = styled.div`
 
 const TagsWrapper = styled.div`
   flex-grow: 1;
-  
+
   ul {
     padding-top: 50px;
     display: grid;
@@ -149,10 +153,10 @@ const Tag: React.FC = (props) => {
   }
   const save = () => {
     // 新增类别
-    if(tag.id <= 0 ) {
+    if (tag.id <= 0) {
       addTag({name: tagName, icon: iconName, category: tag.category})
     }
-     navigate(-1);
+    navigate(-1);
   }
   type CategoryType = '-' | '+'
   const tagContent = (tag: { id: number, name: string, icon: string, category: CategoryType }) => (
@@ -197,7 +201,6 @@ const Tag: React.FC = (props) => {
           </ul>
         </TagsWrapper>
       </SelectIcon>
-
     </Layout>
   )
 }
