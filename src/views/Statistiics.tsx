@@ -5,6 +5,7 @@ import {RecordItem, useRecords} from "../hooks/useRecords";
 import {Icon} from "../components/Icon";
 import day from 'dayjs'
 import styled from 'styled-components'
+import {useIcons} from "../hooks/useIcons";
 
 const Item = styled.div`
   display: flex;
@@ -144,7 +145,7 @@ const Gap = styled.div`
 `
 
 function Statistics() {
-  const {getName, getIcon} = useTags();
+  const {getAllName, getAllIcon} = useTags();
   const [category, setCategory] = useState<'-' | '+'>('-');
   const {records} = useRecords()
   const hash: { [K: string]: RecordItem[] } = {}
@@ -221,8 +222,9 @@ function Statistics() {
               return <Item key={r.createdAt}>
                 {r.tagIds.map(tagId => {
                   return <div key={tagId} className='tag'>
-                    <Icon name={getIcon(tagId)}></Icon>
-                    <span>{getName(tagId)}</span>
+
+                    <Icon name={getAllIcon(tagId)}></Icon>
+                    <span>{getAllName(tagId)}</span>
                   </div>
                 })}
                 <div className='note'>{r.note}</div>

@@ -3,11 +3,20 @@ import {createId} from "../lib/createId";
 import {useUpdate} from "./useUpdate";
 
 type CategoryType = '-' | '+'
-
+let localTags2 = []
 const useTags = () => {
   const [tags, setTags] = useState<{ id: number, name: string, icon: string, category: CategoryType }[]>([])
+  const [allTags,setAllTags] = useState<{ id: number, name: string, icon: string, category: CategoryType }[]>([])
+
   useEffect(() => {
     let localTags = JSON.parse((window.localStorage.getItem('tags') || '[]'))
+    if (localTags2.length === 0) {
+      localTags2 = JSON.parse((window.localStorage.getItem('tags') || '[]'))
+    }
+    else {
+      localTags2 = JSON.parse((window.localStorage.getItem('allTags') || '[]'))
+    }
+
     if (localTags.length === 0) {
       localTags = [
         {id: -1, name: '', icon: 'empty', category: '-' as CategoryType},
@@ -36,10 +45,11 @@ const useTags = () => {
       ]
     }
     setTags(localTags)
-
+    setAllTags(localTags2)
   }, [])
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags))
+    window.localStorage.setItem('allTags', JSON.stringify(allTags))
   }, tags)
 
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0];
@@ -58,14 +68,28 @@ const useTags = () => {
     return tag ? tag.name : ''
   }
 
+  const getAllName = (id: number) => {
+    const allTag = allTags.filter(t => t.id === id)[0]
+    console.log(id)
+    return allTag ? allTag.name : ''
+
+  }
+
+
   const getIcon = (id: number) => {
     const tag = tags.filter(t => t.id === id)[0]
     return tag ? tag.icon : ''
   }
 
+  const getAllIcon = (id: number) => {
+    const allTag = allTags.filter(t => t.id === id)[0]
+    return allTag ? allTag.icon : ''
+  }
+
   const addTag = (obj: { name: string, icon: string, category: CategoryType }) => {
     if (obj.name !== '' && obj.icon !== 'empty' && obj.icon !== '') {
       setTags([...tags, {id: createId(), name: obj.name, icon: obj.icon, category: obj.category}])
+      setAllTags([...allTags, {id: createId(), name: obj.name, icon: obj.icon, category: obj.category}])
     }
   }
   const updateTag = (id: number, obj: { name: string, icon: string, category: CategoryType }) => {
@@ -88,7 +112,7 @@ const useTags = () => {
     setTags(tags.filter(tag => tag.id !== id))
   }
 
-  return {tags, setTags, findTag, updateTag, deleteTag, addTag, getName, getIcon}
+  return {tags, setTags, findTag, updateTag, deleteTag, addTag, getName, getIcon,getAllName,getAllIcon}
 }
 
 export {useTags}

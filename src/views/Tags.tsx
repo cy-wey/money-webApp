@@ -10,7 +10,7 @@ import {Space} from "../components/Space";
 import {Button} from "../components/Button";
 
 import 'animation.scss';
-import {Modal} from 'antd';
+import {Modal,message} from 'antd';
 import {createContext} from 'react';
 
 const ReachableContext = createContext<string | null>(null);
@@ -92,6 +92,7 @@ function Tags() {
       title: '确认删除标签',
       onOk() {
         deleteTag(tagId)
+        message.success('删除成功',1)
       },
       cancelText:'否',
       okText:'是',

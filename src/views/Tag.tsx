@@ -7,6 +7,7 @@ import styled from "styled-components";
 import {Center} from "../components/Center";
 import {Input} from "../components/Input";
 import {useIcons} from "../hooks/useIcons";
+import {message} from "antd";
 
 type Params = {
   id: string
@@ -143,7 +144,6 @@ const Tag: React.FC = (props) => {
       setSelectedTags([tagId])
       const icon = findIcon(tagId)
       iconName = icon.name;
-      console.log(iconName)
       updateTag(tag.id, {name: tag.name, icon: icon.name, category: tag.category})
     }
   }
@@ -155,6 +155,8 @@ const Tag: React.FC = (props) => {
     // 新增类别
     if (tag.id <= 0) {
       addTag({name: tagName, icon: iconName, category: tag.category})
+      message.success("添加成功",1)
+      console.log(1)
     }
     navigate(-1);
   }
@@ -197,7 +199,6 @@ const Tag: React.FC = (props) => {
               <li key={icon.id} onClick={() => onToggleTag(icon.id)} className={getClass(icon.id)}>
                 <Icon name={icon.name}></Icon>
               </li>)}
-
           </ul>
         </TagsWrapper>
       </SelectIcon>
