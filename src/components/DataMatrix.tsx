@@ -20,7 +20,7 @@ const ModalMask = styled.div`
       padding: 20px;
       > div {
         position: absolute;
-        background: url("https://s3.bmp.ovh/imgs/2023/02/02/e22340fb23292439.png") center no-repeat;
+        background: url("https://s3.bmp.ovh/imgs/2023/02/03/2e94ace71cb09a9f.png") center no-repeat;
         background-size: 300px;
         width: 100%;
         height: 100%;
