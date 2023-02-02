@@ -5,10 +5,10 @@ git init &&
 git add . &&
 git commit -m "update" &&
 git branch -M main &&
-git remote add origin git@gitee.com:wei-cunyi/react-money.git &&
+git remote add origin git@gitee.com:wei-cunyi/money-website.git &&
 git push -f -u origin main &&
 git branch -M main &&
-git remote add origin git@gitee.com:wei-cunyi/react-money.git &&
+git remote add origin git@gitee.com:wei-cunyi/money-website.git &&
 git push -f -u origin main &&
 cd -
-echo https://cy-wey.github.io/money-website/index.html
+echo https://wei-cunyi.gitee.io/money-website/index.html
