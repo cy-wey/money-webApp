@@ -85,11 +85,7 @@ const useTags = () => {
     // const tagsClone = JSON.parse(JSON.stringify(tags));
     // tagsClone.splice(index, 1);
     // setTags(tagsClone);
-    let x = window.confirm("确认删除?")
-    if (x === true)
-    {
-      setTags(tags.filter(tag => tag.id !== id))
-    }
+    setTags(tags.filter(tag => tag.id !== id))
   }
 
   return {tags, setTags, findTag, updateTag, deleteTag, addTag, getName, getIcon}

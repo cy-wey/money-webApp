@@ -21,13 +21,6 @@ const Wrapper = styled.div`
   height: calc(100vh - var(--vh-offset, 0px));
 `;
 
-const Dm = styled.div`
-  @media(min-width: 800px) {
-
-  }
- 
-`
-
 function App() {
   return (
     <Router>
