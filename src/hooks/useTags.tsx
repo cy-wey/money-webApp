@@ -3,13 +3,13 @@ import {createId} from "../lib/createId";
 import {useUpdate} from "./useUpdate";
 
 type CategoryType = '-' | '+'
-let localTags2 = []
 const useTags = () => {
   const [tags, setTags] = useState<{ id: number, name: string, icon: string, category: CategoryType }[]>([])
   const [allTags,setAllTags] = useState<{ id: number, name: string, icon: string, category: CategoryType }[]>([])
 
   useEffect(() => {
     let localTags = JSON.parse((window.localStorage.getItem('tags') || '[]'))
+    let localTags2 = JSON.parse((window.localStorage.getItem('allTags') || '[]'))
     if (localTags2.length === 0) {
       localTags2 = JSON.parse((window.localStorage.getItem('tags') || '[]'))
     }
@@ -88,8 +88,9 @@ const useTags = () => {
 
   const addTag = (obj: { name: string, icon: string, category: CategoryType }) => {
     if (obj.name !== '' && obj.icon !== 'empty' && obj.icon !== '') {
-      setTags([...tags, {id: createId(), name: obj.name, icon: obj.icon, category: obj.category}])
-      setAllTags([...allTags, {id: createId(), name: obj.name, icon: obj.icon, category: obj.category}])
+      let id = createId()
+      setTags([...tags, {id: id, name: obj.name, icon: obj.icon, category: obj.category}])
+      setAllTags([...allTags, {id: id, name: obj.name, icon: obj.icon, category: obj.category}])
     }
   }
   const updateTag = (id: number, obj: { name: string, icon: string, category: CategoryType }) => {
