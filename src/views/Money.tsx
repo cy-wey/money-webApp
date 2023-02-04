@@ -5,8 +5,7 @@ import {NumberPadSection} from './Money/NumberPadSection';
 import styled from 'styled-components';
 import {TagsSection} from "./Money/TagsSection";
 import {useRecords} from "../hooks/useRecords";
-import {message} from "antd";
-
+import {alertTip} from "../components/AlertTip";
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
@@ -31,11 +30,13 @@ function Money() {
     });
   };
   const submit = () => {
+
     if (addRecord(selected) === true) {
       setSelected({
         ...selected,
         amount: 0,
       })
+      alertTip("保存成功", 'success')
     }
   }
   return (

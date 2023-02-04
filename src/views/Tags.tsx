@@ -9,7 +9,7 @@ import {Center} from "../components/Center";
 import {Space} from "../components/Space";
 import {Button} from "../components/Button";
 import 'animation.scss';
-import {messageBox, MessageBox} from "../components/MessageBox";
+import {messageBox} from "../components/MessageBox";
 
 const TabList = styled.ul`
   margin-top: 62px;

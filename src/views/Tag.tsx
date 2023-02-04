@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {Center} from "../components/Center";
 import {Input} from "../components/Input";
 import {useIcons} from "../hooks/useIcons";
-import {message} from "antd";
+import {alertTip} from "../components/AlertTip";
 
 type Params = {
   id: string
@@ -155,8 +155,7 @@ const Tag: React.FC = (props) => {
     // 新增类别
     if (tag.id <= 0) {
       addTag({name: tagName, icon: iconName, category: tag.category})
-      message.success("添加成功",1)
-      console.log(1)
+      alertTip("添加成功",'success')
     }
     navigate(-1);
   }
