@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const TagsWrapper = styled.div`
   margin-top: 60px;
-  margin-bottom: 260px;
+  margin-bottom: 320px;
   flex-grow: 1;
 
   ul {

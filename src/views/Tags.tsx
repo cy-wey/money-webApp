@@ -8,15 +8,8 @@ import {CategorySection} from "./Money/CategorySection";
 import {Center} from "../components/Center";
 import {Space} from "../components/Space";
 import {Button} from "../components/Button";
-
 import 'animation.scss';
-import {Modal,message} from 'antd';
-import {createContext} from 'react';
-
-const ReachableContext = createContext<string | null>(null);
-const UnreachableContext = createContext<string | null>(null);
-
-
+import {messageBox, MessageBox} from "../components/MessageBox";
 
 const TabList = styled.ul`
   margin-top: 62px;
@@ -73,8 +66,6 @@ const TabList = styled.ul`
 
 
 function Tags() {
-
-  const [modal, contextHolder] = Modal.useModal();
   const {tags, setTags, deleteTag} = useTags()
   const [category, setCategory] = useState<'-' | '+'>('-');
   const SelectedTags = tags.filter(r => r.category === category && r.id > 0)
@@ -88,47 +79,46 @@ function Tags() {
   }
 
   const deleteLabel = (tagId: number) => {
-    const config = {
-      title: '确认删除标签',
-      onOk() {
-        deleteTag(tagId)
-        message.success('删除成功',1)
+    const options = {
+      title:'提示',
+      content:'确认删除该标签？',
+      ok() {
+         deleteTag(tagId)
       },
-      cancelText:'否',
-      okText:'是',
-    };
-    modal.confirm(config);
-
-    //
+      cancel() {}
+    }
+    messageBox(options)
   }
+
+
   return (
-    <ReachableContext.Provider value="Light">
-      <Layout>
-        <CategorySection value={category}
-                         onChange={value => setCategory(value)}/>
-        <TabList>
-          {SelectedTags.map(tag =>
-            <li key={tag.id}>
-              <Icon className="deleteIcon" name="删除" onClick={() => deleteLabel(tag.id)}/>
-              <Link to={'/tags/' + tag.id}>
-                <div>
-                  <Icon className="icon tagIcon" name={tag.icon}/>
-                  <span>{tag.name}</span>
-                </div>
-                <Icon className="icon right-arrow" name="right"/>
-              </Link>
-            </li>
-          )}
-        </TabList>
-        <Center>
-          <Space/>
-          <Button className='addButton' onClick={addTag}>新增类别</Button>
-          <Space/>
-        </Center>
-      </Layout>
-      {contextHolder}
-      <UnreachableContext.Provider value="Bamboo"/>
-    </ReachableContext.Provider>
+    <Layout>
+      <CategorySection value={category}
+                       onChange={value => setCategory(value)}/>
+      <TabList>
+        {SelectedTags.map(tag =>
+          <li key={tag.id}>
+            <Icon className="deleteIcon" name="删除" onClick={() => deleteLabel(tag.id)}/>
+            <Link to={'/tags/' + tag.id}>
+              <div>
+                <Icon className="icon tagIcon" name={tag.icon}/>
+                <span>{tag.name}</span>
+              </div>
+              <Icon className="icon right-arrow" name="right"/>
+            </Link>
+          </li>
+        )}
+      </TabList>
+      <Center>
+        <Space/>
+        <Button className='addButton' onClick={addTag}>新增类别</Button>
+        <Space/>
+        <Space/>
+        <Space/>
+        <Space/>
+        <Space/>
+      </Center>
+    </Layout>
   );
 }
 

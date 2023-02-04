@@ -4,6 +4,8 @@ import {Icon} from './Icon';
 
 
 const Wrapper = styled.nav`
+  position: absolute;
+  bottom: 0;
   width: 100%;
   background: #FCFCFC;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);

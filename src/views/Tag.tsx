@@ -87,7 +87,7 @@ const SelectIcon = styled.div`
 
 const TagsWrapper = styled.div`
   flex-grow: 1;
-
+  margin-bottom: 60px;
   ul {
     padding-top: 50px;
     display: grid;

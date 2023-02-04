@@ -18,6 +18,7 @@ const ModalMask = styled.div`
       background: #fff;
       height: 380px;
       padding: 20px;
+
       > div {
         position: absolute;
         background: url("https://s3.bmp.ovh/imgs/2023/02/03/2e94ace71cb09a9f.png") center no-repeat;
@@ -26,18 +27,8 @@ const ModalMask = styled.div`
         height: 100%;
         left: 0;
         top: 5%;
-        
       }
     }
-  }
-
-`
-
-const Code = styled.div`
- 
-
-  > div {
-
   }
 `
 
@@ -48,7 +39,6 @@ const DataMatrix = () => {
         <div>该应用为手机应用，请扫码查看
           <div/>
         </div>
-
       </ModalMask>
     </div>
   )

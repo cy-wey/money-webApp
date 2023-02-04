@@ -70,11 +70,8 @@ const useTags = () => {
 
   const getAllName = (id: number) => {
     const allTag = allTags.filter(t => t.id === id)[0]
-    console.log(id)
     return allTag ? allTag.name : ''
-
   }
-
 
   const getIcon = (id: number) => {
     const tag = tags.filter(t => t.id === id)[0]

@@ -14,6 +14,9 @@ const Item = styled.div`
   line-height: 20px;
   padding: 8px 0;
   border-bottom: 1px solid #e7e7e7;
+  :nth-last-of-type {
+    border: 1px solid red;
+  }
   > div {
     display: flex;
     align-items: center;
