@@ -3,7 +3,6 @@ import {createId} from "../lib/createId";
 
 const defaultIcons = [
   {id: createId(), name: '书籍教材'},
-  {id: createId(), name: '买菜'},
   {id: createId(), name: '交通'},
   {id: createId(), name: '修理维护'},
   {id: createId(), name: '化妆品'},

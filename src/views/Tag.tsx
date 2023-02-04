@@ -144,7 +144,8 @@ const Tag: React.FC = (props) => {
       setSelectedTags([tagId])
       const icon = findIcon(tagId)
       iconName = icon.name;
-      updateTag(tag.id, {name: tag.name, icon: icon.name, category: tag.category})
+      tagName = icon.name;
+      updateTag(tag.id, {name: tagName , icon:iconName, category: tag.category})
     }
   }
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -155,8 +156,8 @@ const Tag: React.FC = (props) => {
     // 新增类别
     if (tag.id <= 0) {
       addTag({name: tagName, icon: iconName, category: tag.category})
-      alertTip("添加成功",'success')
     }
+    alertTip("保存成功",'success')
     navigate(-1);
   }
   type CategoryType = '-' | '+'

@@ -24,7 +24,6 @@ const useTags = () => {
         {id: createId(), name: '餐饮',icon: '餐饮', category: '-' as CategoryType},
         {id: createId(), name: '饮品',icon: '饮品', category: '-' as CategoryType},
         {id: createId(), name: '零食',icon: '零食', category: '-' as CategoryType},
-        {id: createId(), name: '买菜',icon: '买菜', category: '-' as CategoryType},
         {id: createId(), name: '交通',icon: '交通', category: '-' as CategoryType},
         {id: createId(), name: '化妆品',icon: '化妆品', category: '-' as CategoryType},
         {id: createId(), name: '家具',icon: '家具', category: '-' as CategoryType},
