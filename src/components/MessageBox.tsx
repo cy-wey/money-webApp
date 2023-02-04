@@ -36,7 +36,7 @@ const Warrper = styled.div`
       float: right;
 
       > button {
-        padding: 4px 15px;
+        padding: 10px 20px;
         margin-left: 8px;
         border: none;
         border-radius: 4px;
@@ -57,7 +57,6 @@ const Warrper = styled.div`
 `
 
 export const MessageBox = (props: any) => {
-
   return (
     <Warrper>
       <div>
